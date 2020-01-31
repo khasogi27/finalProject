@@ -20,6 +20,7 @@ pipeDown.src = "images/pipeDown.png";
 // some variable
 
 var gap = 95;
+var constant;
 
 var bX = 50;
 var bY = 150;
@@ -59,7 +60,7 @@ pipe[0] = {
 function draw() {
   ctx.drawImage(bg, 0, 0);
 
-  for (i = 0; i < pipe.length; i++) {
+  for (var i = 0; i < pipe.length; i++) {
     constant = pipeUp.height + gap;
     ctx.drawImage(pipeUp, pipe[i].x, pipe[i].y);
     ctx.drawImage(pipeDown, pipe[i].x, pipe[i].y + constant);
