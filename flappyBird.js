@@ -20,6 +20,7 @@ pipeDown.src = "images/pipeDown.png";
 // some variable
 
 var gap = 95;
+var constant;
 
 var bX = 50;
 var bY = 150;
