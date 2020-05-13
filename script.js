@@ -3,17 +3,17 @@ alert("play again?");
  // DOM to canvas
  // =============
 
-var cvs = document.getElementById("canvas");
-var ctx = cvs.getContext("2d");
+let cvs = document.getElementById("canvas");
+let ctx = cvs.getContext("2d");
 
 // load imges
 // ==========
 
-var bird = new Image();
-var bg = new Image();
-var fg = new Image();
-var pipeUp = new Image();
-var pipeDown = new Image();
+let bird = new Image();
+let bg = new Image();
+let fg = new Image();
+let pipeUp = new Image();
+let pipeDown = new Image();
 
 bird.src = "images/bird.png";
 bg.src = "images/bg.png";
@@ -24,21 +24,21 @@ pipeDown.src = "images/pipeDown.png";
 // some variable
 // =============
 
-var gap = 95; 
-var constant;
+let gap = 95; 
+let constant;
 
-var bX = 50;
-var bY = 150;
+let bX = 50;
+let bY = 150;
 
-var gravity = 1.7;
+let gravity = 1.7;
 
-var score = 0;
+let score = 0;
 
 // audio files
 // ===========
 
-var fly = new Audio();
-var scor = new Audio();
+let fly = new Audio();
+let scor = new Audio();
 
 fly.src = "sounds/fly.mp3";
 scor.src = "sounds/score.mp3";
@@ -56,7 +56,7 @@ function moveUp() {
 // pipe coordinates
 // ================
 
-var pipe = [];
+let pipe = [];
 
 pipe[0] = {
   x: cvs.width,
@@ -69,7 +69,7 @@ pipe[0] = {
 function draw() {
   ctx.drawImage(bg, 0, 0);
 
-  for (var i = 0; i < pipe.length; i++) {
+  for (let i = 0; i < pipe.length; i++) {
     constant = pipeUp.height + gap;
     ctx.drawImage(pipeUp, pipe[i].x, pipe[i].y);
     ctx.drawImage(pipeDown, pipe[i].x, pipe[i].y + constant);

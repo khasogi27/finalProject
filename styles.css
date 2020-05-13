@@ -1,0 +1,10 @@
+body,
+h1,
+footer,
+canvas {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    border-radius: 35px;
+}
