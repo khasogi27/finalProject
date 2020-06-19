@@ -1,4 +1,4 @@
 # finalProject
 Final Project
 
-Pages : https://khasogi27.github.io/finalProject/
+[DEMO](https://khasogi27.github.io/finalProject/)
