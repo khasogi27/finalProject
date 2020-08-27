@@ -1,7 +1,5 @@
-alert("play again?");
-
- // DOM to canvas
- // =============
+// DOM to canvas
+// =============
 
 let cvs = document.getElementById("canvas");
 let ctx = cvs.getContext("2d");
@@ -24,7 +22,7 @@ pipeDown.src = "images/pipeDown.png";
 // some variable
 // =============
 
-let gap = 95; 
+let gap = 95;
 let constant;
 
 let bX = 50;
@@ -76,7 +74,7 @@ function draw() {
 
     pipe[i].x--;
 
-    if (pipe[i].x == 120) {
+    if (pipe[i].x === 120) {
       pipe.push({
         x: cvs.width,
         y: Math.floor(Math.random() * pipeUp.height) - pipeUp.height
@@ -88,9 +86,10 @@ function draw() {
 
     if ((bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeUp.width && (bY <= pipe[i].y + pipeUp.height || bY + bird.height >= pipe[i].y + constant)) || bY + bird.height >= cvs.height - fg.height) {
       location.reload(); //! reload the page
-    }                    
+      alert("play again?");
+    }
 
-    if (pipe[i].x == 35) {
+    if (pipe[i].x === 35) {
       score++;
       scor.play();
     }

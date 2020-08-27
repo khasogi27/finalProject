@@ -1,7 +1,4 @@
-body,
-h1,
-footer,
-canvas {
+body, h1, footer, canvas {
     background-color: black;
     color: white;
     padding: 5px;
