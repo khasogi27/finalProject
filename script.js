@@ -1,49 +1,35 @@
-// DOM to canvas
-// =============
+let message = prompt('Masukan nama anda').toUpperCase();
 
+// DOM to canvas
 let cvs = document.getElementById("canvas");
 let ctx = cvs.getContext("2d");
 
-// load imges
-// ==========
-
+// load imges & audio files
 let bird = new Image();
 let bg = new Image();
 let fg = new Image();
 let pipeUp = new Image();
 let pipeDown = new Image();
-
-bird.src = "images/bird.png";
-bg.src = "images/bg.png";
-fg.src = "images/fg.png";
-pipeUp.src = "images/pipeUp.png";
-pipeDown.src = "images/pipeDown.png";
-
-// some variable
-// =============
-
-let gap = 95;
-let constant;
-
-let bX = 50;
-let bY = 150;
-
-let gravity = 1.7;
-
-let score = 0;
-
-// audio files
-// ===========
-
 let fly = new Audio();
 let scor = new Audio();
 
+bird.src = "./images/bird.png";
+bg.src = "./images/bg.png";
+fg.src = "./images/fg.png";
+pipeUp.src = "./images/pipeUp.png";
+pipeDown.src = "./images/pipeDown.png";
 fly.src = "sounds/fly.mp3";
 scor.src = "sounds/score.mp3";
 
-// on key up
-// =========
+// some variable
+let gap = 95;
+let constant;
+let bX = 50;
+let bY = 150;
+let gravity = 1.7;
+let score = 0;
 
+// on key up
 document.addEventListener("keyup", moveUp);
 
 function moveUp() {
@@ -52,8 +38,6 @@ function moveUp() {
 }
 
 // pipe coordinates
-// ================
-
 let pipe = [];
 
 pipe[0] = {
@@ -62,8 +46,6 @@ pipe[0] = {
 };
 
 // draw images
-// ===========
-
 function draw() {
   ctx.drawImage(bg, 0, 0);
 
@@ -82,24 +64,23 @@ function draw() {
     }
 
     // detect collision
-    // ================
-
-    if ((bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeUp.width && (bY <= pipe[i].y + pipeUp.height || bY + bird.height >= pipe[i].y + constant)) || bY + bird.height >= cvs.height - fg.height) {
+    if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeUp.width && (bY <= pipe[i].y + pipeUp.height || bY + bird.height >= pipe[i].y + constant)) {
       location.reload(); //! reload the page
-      alert("play again?");
+      alert(`Skor terakhir kamu ${message} adalah : ${score}`);
     }
-
+    if (bY + bird.height >= cvs.height - fg.height) {
+      location.reload();
+      alert(`Skor terakhir kamu ${message} adalah : ${score}`);
+    }
     if (pipe[i].x === 35) {
       score++;
       scor.play();
     }
   }
+  
   ctx.drawImage(fg, 0, cvs.height - fg.height);
-
   ctx.drawImage(bird, bX, bY);
-
-
-
+  
   bY += gravity;
 
   ctx.fillStyle = "black";
