@@ -1,4 +1,4 @@
-let message = prompt('Masukan nama anda').toUpperCase();
+let message = prompt('Masukan nama anda untuk memulai');
 
 // DOM to canvas
 let cvs = document.getElementById("canvas");
@@ -12,14 +12,16 @@ let pipeUp = new Image();
 let pipeDown = new Image();
 let fly = new Audio();
 let scor = new Audio();
+let gameOver = new Audio();
 
 bird.src = "./images/bird.png";
 bg.src = "./images/bg.png";
 fg.src = "./images/fg.png";
 pipeUp.src = "./images/pipeUp.png";
 pipeDown.src = "./images/pipeDown.png";
-fly.src = "sounds/fly.mp3";
-scor.src = "sounds/score.mp3";
+fly.src = "./sounds/fly.mp3";
+scor.src = "./sounds/score.mp3";
+gameOver.src = "./sounds/gameOver.mp3";
 
 // some variable
 let gap = 95;
@@ -65,11 +67,13 @@ function draw() {
 
     // detect collision
     if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeUp.width && (bY <= pipe[i].y + pipeUp.height || bY + bird.height >= pipe[i].y + constant)) {
+      gameOver.play();
       location.reload(); //! reload the page
       alert(`Skor terakhir kamu ${message} adalah : ${score}`);
     }
     if (bY + bird.height >= cvs.height - fg.height) {
-      location.reload();
+      gameOver.play();
+      location.reload(); //! reload the page
       alert(`Skor terakhir kamu ${message} adalah : ${score}`);
     }
     if (pipe[i].x === 35) {
@@ -77,10 +81,10 @@ function draw() {
       scor.play();
     }
   }
-  
+
   ctx.drawImage(fg, 0, cvs.height - fg.height);
   ctx.drawImage(bird, bX, bY);
-  
+
   bY += gravity;
 
   ctx.fillStyle = "black";
