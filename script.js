@@ -24,14 +24,15 @@ scor.src = "./sounds/score.mp3";
 gameOver.src = "./sounds/gameOver.mp3";
 
 // some variable
-let gap = 95;
-let constant;
+let gap = 100;
+let constant = 0;
 let bX = 50;
 let bY = 150;
-let gravity = 1.7;
+let gravity = 2;
 let score = 0;
 
-// on key up
+// on key up or click
+document.addEventListener("click", moveUp);
 document.addEventListener("keyup", moveUp);
 
 function moveUp() {
@@ -58,7 +59,7 @@ function draw() {
 
     pipe[i].x--;
 
-    if (pipe[i].x === 120) {
+    if (pipe[i].x === 100) {
       pipe.push({
         x: cvs.width,
         y: Math.floor(Math.random() * pipeUp.height) - pipeUp.height
@@ -67,13 +68,10 @@ function draw() {
 
     // detect collision
     if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeUp.width && (bY <= pipe[i].y + pipeUp.height || bY + bird.height >= pipe[i].y + constant)) {
+      gravity++;
+    } else if (bY + bird.height >= cvs.height - fg.height) {
       gameOver.play();
-      location.reload(); //! reload the page
-      alert(`Skor terakhir kamu ${message} adalah : ${score}`);
-    }
-    if (bY + bird.height >= cvs.height - fg.height) {
-      gameOver.play();
-      location.reload(); //! reload the page
+      location.reload();
       alert(`Skor terakhir kamu ${message} adalah : ${score}`);
     }
     if (pipe[i].x === 35) {
