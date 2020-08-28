@@ -24,10 +24,10 @@ scor.src = "./sounds/score.mp3";
 gameOver.src = "./sounds/gameOver.mp3";
 
 // some variable
-let gap = 100;
+let gap = 110;
 let constant = 0;
-let bX = 50;
-let bY = 150;
+let bX = 10;
+let bY = 300;
 let gravity = 2;
 let score = 0;
 
@@ -36,7 +36,7 @@ document.addEventListener("click", moveUp);
 document.addEventListener("keyup", moveUp);
 
 function moveUp() {
-  bY -= 37;
+  bY -= 30;
   fly.play();
 }
 
@@ -58,23 +58,28 @@ function draw() {
     ctx.drawImage(pipeDown, pipe[i].x, pipe[i].y + constant);
 
     pipe[i].x--;
+    gravity = 2;
 
-    if (pipe[i].x === 100) {
+    if (pipe[i].x === -75) {
       pipe.push({
         x: cvs.width,
-        y: Math.floor(Math.random() * pipeUp.height) - pipeUp.height
+        y: Math.floor(Math.random() * pipeDown.height) - pipeDown.height
       });
     }
 
     // detect collision
     if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeUp.width && (bY <= pipe[i].y + pipeUp.height || bY + bird.height >= pipe[i].y + constant)) {
-      gravity++;
-    } else if (bY + bird.height >= cvs.height - fg.height) {
       gameOver.play();
       location.reload();
-      alert(`Skor terakhir kamu ${message} adalah : ${score}`);
+      return alert(`Skor terakhir kamu ${message} adalah : ${score}`);
     }
-    if (pipe[i].x === 35) {
+    if (bY + bird.height >= cvs.height - fg.height) {
+      gravity = 0;
+      gap--;
+    }
+
+    
+    if (pipe[i].x === 5) {
       score++;
       scor.play();
     }
